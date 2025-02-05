@@ -1,0 +1,13 @@
+**/package-lock.json
+**/node_modules
+**/.DS_Store
+.DS_Store
+**/.env
+**/.env.*
+**/venv
+**/venvl
+*.csv
+**/p
+**/__pycache__/
+**/.pytest_cache/
+*.pem
