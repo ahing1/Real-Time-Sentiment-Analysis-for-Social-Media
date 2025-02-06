@@ -4,8 +4,7 @@
 .DS_Store
 **/.env
 **/.env.*
-**/venv
-**/venvl
+**/.venv
 *.csv
 **/p
 **/__pycache__/
