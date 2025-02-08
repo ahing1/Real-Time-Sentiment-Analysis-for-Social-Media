@@ -1,6 +1,8 @@
 import tweepy
+import json
 import time
 from twitter_auth import authenticate_twitter
+from preprocess import clean_tweet
 
 def search_tweets(query, max_results=10):
     """Fetch recent tweets based on a query while respecting rate limits."""
@@ -14,10 +16,15 @@ def search_tweets(query, max_results=10):
         )
 
         if response.data:
-            for tweet in response.data:
-                print(f"[{tweet.created_at}] {tweet.text}\n")
+            with open("tweets.json", "a") as file:
+                for tweet in response.data:
+                    cleaned_text = clean_tweet(tweet.text)  # Preprocess text
+                    json.dump({"created_at": tweet.created_at.isoformat(), "text": cleaned_text}, file)
+                    file.write("\n")
+                    print(f"Saved Cleaned Tweet: {cleaned_text}")
+
         else:
-            print("No tweets found.")
+            print("No new tweets found.")
 
     except tweepy.TooManyRequests as e:
         print("⚠️ Rate limit reached. Waiting before retrying...")
