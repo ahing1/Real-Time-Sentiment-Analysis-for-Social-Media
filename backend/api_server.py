@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 import mysql.connector
 import uvicorn
+from fastapi.middleware.cors import CORSMiddleware
 
 # MySQL Configuration
 DB_NAME = "sentiment_db"
@@ -11,6 +12,15 @@ DB_PORT = "3306"
 
 # Initialize FastAPI App
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allow all origins (change to specific domain if needed)
+    allow_credentials=True,
+    allow_methods=["*"],  # Allow all HTTP methods (GET, POST, etc.)
+    allow_headers=["*"],  # Allow all headers
+)
+
 
 # Database Connection Function
 def get_db_connection():
@@ -69,4 +79,4 @@ def get_sentiment_stats():
     return {"stats": stats}
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="127.0.0.1", port=8000)
