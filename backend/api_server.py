@@ -3,6 +3,9 @@ import mysql.connector
 import uvicorn
 from fastapi.middleware.cors import CORSMiddleware
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # MySQL Configuration
 DB_HOST = os.getenv("DB_HOST")
