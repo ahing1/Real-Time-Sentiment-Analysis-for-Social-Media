@@ -2,13 +2,14 @@ from fastapi import FastAPI
 import mysql.connector
 import uvicorn
 from fastapi.middleware.cors import CORSMiddleware
+import os
 
 # MySQL Configuration
-DB_NAME = "sentiment_db"
-DB_USER = "root"
-DB_PASSWORD = ""
-DB_HOST = "localhost"
-DB_PORT = "3306"
+DB_HOST = os.getenv("DB_HOST")
+DB_USER = os.getenv("DB_USER")
+DB_PASSWORD = os.getenv("DB_PASSWORD")
+DB_NAME = os.getenv("DB_NAME")
+DB_PORT = os.getenv("DB_PORT")
 
 # Initialize FastAPI App
 app = FastAPI()
