@@ -40,9 +40,9 @@ def get_db_connection():
 consumer = KafkaConsumer(
     KAFKA_TOPIC,
     bootstrap_servers=[KAFKA_SERVER],
-    auto_offset_reset="earliest",
-    enable_auto_commit=True,
-    value_deserializer=lambda x: json.loads(x.decode("utf-8"))
+    security_protocol="SSL",
+    ssl_cafile="./AmazonRootCA1.pem",
+    value_deserializer=lambda v: json.loads(v.decode("utf-8"))
 )
 
 print(f"Listening for messages on topic: {KAFKA_TOPIC}")
